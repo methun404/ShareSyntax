@@ -63,25 +63,25 @@ Whether you need a quick pastebin alternative with live editing, an interactive 
 ```mermaid
 graph TD
     subgraph Client["Frontend (Vue 3 + Vite)"]
-        UI[Glassmorphism UI / Tailwind CSS]
-        Editor[Monaco Code Editor]
-        Stores[Pinia Stores: UI, Editor, Groups, Auth]
-        PWA[Service Worker & PWA Cache]
+        UI["Glassmorphism UI / Tailwind CSS"]
+        Editor["Monaco Code Editor"]
+        Stores["Pinia Stores (UI, Editor, Groups, Auth)"]
+        PWA["Service Worker & PWA Cache"]
     end
 
     subgraph Transport["Transport Layer"]
-        WS[Socket.IO WebSockets (Real-time events)]
-        HTTP[REST API (Auth, Projects, Devices, Uploads)]
+        WS["Socket.IO WebSockets (Real-time events)"]
+        HTTP["REST API (Auth, Projects, Devices, Uploads)"]
     end
 
     subgraph Server["Backend (Node.js + Express 5)"]
-        MW[Helmet, CORS, JWT Auth & Rate Limiter]
-        SocketHandler[Room State & Socket Event Manager]
-        Crypto[AES-256 Crypto & Hash Utilities]
+        MW["Helmet, CORS, JWT Auth & Rate Limiter"]
+        SocketHandler["Room State & Socket Event Manager"]
+        Crypto["AES-256 Crypto & Hash Utilities"]
     end
 
     subgraph Storage["Database Layer"]
-        MySQL[(MySQL Database)]
+        MySQL[("MySQL Database")]
         Tables["users | projects | project_guests | room_messages | room_snapshots | saved_devices"]
     end
 
