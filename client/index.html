@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/logo.png" />
+  <link rel="apple-touch-icon" href="/logo.png" />
+  <meta name="theme-color" content="#050510" />
+  <link rel="canonical" href="https://sharesyntax.com/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Primary Meta Tags -->
+  <title>ShareSyntax - Real-time Collaborative Code Editor & Text Share</title>
+  <meta name="title" content="ShareSyntax - Real-time Collaborative Code Editor & Text Share" />
+  <meta name="description" content="Share code instantly with ShareSyntax. A free, fast, and real-time collaborative code editor with integrated developer temporary chat. Perfect for text sharing, pair programming, and anonymous tmp chat." />
+  <meta name="keywords" content="code share, text share, tmp chat, temporary chat, collaborative code editor, real-time coding, pair programming, anonymous developer chat, share syntax, online code editor, live code collaboration, pastebin alternative" />
+  <meta name="author" content="ShareSyntax" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ShareSyntax - Real-time Collaborative Code Editor & Text Share" />
+  <meta property="og:description" content="A free, fast, and real-time collaborative code editor with integrated developer tmp chat. Drop in and start sharing code/text together instantly." />
+  <meta property="og:image" content="/logo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="ShareSyntax - Real-time Collaborative Code Editor & Text Share" />
+  <meta property="twitter:description" content="A free, fast, and real-time collaborative code editor with integrated developer tmp chat. Drop in and start sharing code/text together instantly." />
+  <meta property="twitter:image" content="/logo.png" />
+
+  <!-- Structured Data JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ShareSyntax",
+    "operatingSystem": "WebBrowser",
+    "applicationCategory": "DeveloperApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A free, real-time collaborative code editor and text share platform with built-in anonymous tmp chat.",
+    "url": "https://sharesyntax.com/"
+  }
+  </script>
+
+  <!-- ═══ PREMIUM SPLASH SCREEN — pure CSS, renders before JS ═══ -->
+  <style>
+    #ss-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #050510;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #ss-splash.ss-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Ambient glow blobs */
+    .ss-blob-tl {
+      position: absolute;
+      top: -15%;
+      left: -10%;
+      width: 55vw;
+      height: 55vw;
+      max-width: 500px;
+      max-height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,134,222,0.18) 0%, transparent 70%);
+      filter: blur(60px);
+      animation: ss-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .ss-blob-br {
+      position: absolute;
+      bottom: -15%;
+      right: -10%;
+      width: 55vw;
+      height: 55vw;
+      max-width: 500px;
+      max-height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(162,155,254,0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      animation: ss-pulse 6s ease-in-out infinite reverse;
+      pointer-events: none;
+    }
+
+    /* Grid lines */
+    .ss-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(46,134,222,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,134,222,0.06) 1px, transparent 1px);
+      background-size: 50px 50px;
+      -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      pointer-events: none;
+    }
+
+    /* Logo ring */
+    .ss-logo-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .ss-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: conic-gradient(from 0deg, #2e86de, #a29bfe, #00e5ff, #2e86de) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: ss-spin 2s linear infinite;
+    }
+    .ss-ring-outer {
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      border: 1px solid rgba(46,134,222,0.2);
+      animation: ss-spin 4s linear infinite reverse;
+    }
+    .ss-logo-inner {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(46,134,222,0.2), inset 0 0 20px rgba(46,134,222,0.05);
+    }
+    .ss-logo-inner img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    /* Brand name */
+    .ss-brand {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #a0b4d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+    .ss-tagline {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* Loading bar */
+    .ss-bar-track {
+      width: 160px;
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+    .ss-bar-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 40%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #2e86de, #00e5ff);
+      box-shadow: 0 0 10px rgba(0,229,255,0.6);
+      animation: ss-slide 1.4s ease-in-out infinite;
+    }
+
+    /* Dot loader */
+    .ss-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 20px;
+    }
+    .ss-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(46,134,222,0.6);
+      animation: ss-bounce 1.2s ease-in-out infinite;
+    }
+    .ss-dot:nth-child(2) { animation-delay: 0.2s; }
+    .ss-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes ss-spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes ss-pulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    @keyframes ss-slide {
+      0%   { left: -40%; width: 40%; }
+      50%  { left: 20%; width: 60%; }
+      100% { left: 110%; width: 40%; }
+    }
+    @keyframes ss-bounce {
+      0%, 80%, 100% { transform: scaleY(1); opacity: 0.6; }
+      40%            { transform: scaleY(1.8); opacity: 1; }
+    }
+    @keyframes ss-fade-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .ss-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      animation: ss-fade-in 0.4s ease both;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Splash: visible instantly, Vue will remove it on mount -->
+  <div id="ss-splash" role="progressbar" aria-label="Loading ShareSyntax…">
+    <div class="ss-blob-tl"></div>
+    <div class="ss-blob-br"></div>
+    <div class="ss-grid"></div>
+    <div class="ss-content">
+      <div class="ss-logo-wrap">
+        <div class="ss-ring-outer"></div>
+        <div class="ss-ring"></div>
+        <div class="ss-logo-inner">
+          <img src="/logo.png" alt="ShareSyntax" />
+        </div>
+      </div>
+      <div class="ss-brand">ShareSyntax</div>
+      <div class="ss-tagline">Real-time Code Share</div>
+      <div class="ss-bar-track">
+        <div class="ss-bar-fill"></div>
+      </div>
+      <div class="ss-dots">
+        <div class="ss-dot"></div>
+        <div class="ss-dot"></div>
+        <div class="ss-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
